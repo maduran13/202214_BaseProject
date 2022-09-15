@@ -1,0 +1,845 @@
+{
+	"info": {
+		"_postman_id": "fe476fc1-a8b9-4500-ad98-cacfe80373be",
+		"name": "Aerolíneas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear una Aerolínea Válida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json()\r",
+							"pm.globals.set(\"airline_id\", data.id);\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"VivaAir\",\r\n    \"descripcion\":\"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\r\n    \"fechafundacion\":\"2020-09-14\",\r\n    \"pagina\":\"https://vivaair.com.co\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una Aerolínea Válida",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"VivaAir\",\r\n    \"descripcion\":\"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\r\n    \"fechafundacion\":\"2020-09-14\",\r\n    \"pagina\":\"https://vivaair.com.co\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"nombre\": \"VivaAir\",\n    \"descripcion\": \"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\n    \"fechafundacion\": \"2020-09-14\",\n    \"pagina\": \"https://vivaair.com.co\",\n    \"id\": \"77bad584-1fe4-423d-8aae-37b4d5c520b1\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear una Aerolínea inválida",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 500\", function () {\r",
+							"   pm.response.to.have.status(500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"VivaAir\",\r\n    \"descripcion\":\"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\r\n    \"fechafundacion\":\"2020-09-14\",\r\n    \"pagina\":\"httpsddddd\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Crear una Aerolínea inválida",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"VivaAir\",\r\n    \"descripcion\":\"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\r\n    \"fechafundacion\":\"2020-09-14\",\r\n    \"pagina\":\"httpsvivaair\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"statusCode\": 400,\r\n    \"message\": [\r\n        \"pagina must be an URL address\"\r\n    ],\r\n    \"error\": \"Bad Request\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todas las aerolíneas",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of airlines > ' + 0, function () {\r",
+							"   var data = pm.response.json()\r",
+							"   pm.expect(data.length).to.greaterThan(0)\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todas las aerolíneas",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\r\n    {\r\n        \"id\": \"c6682e47-afd6-4b82-b15f-eaa0c2ffc8aa\",\r\n        \"nombre\": \"VivaAir\",\r\n        \"descripcion\": \"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\r\n        \"fechafundacion\": \"2020-01-01T05:00:00.000Z\",\r\n        \"pagina\": \"https://vivaair.com.co\",\r\n        \"aeropuertos\": []\r\n    },\r\n    {\r\n        \"id\": \"77bad584-1fe4-423d-8aae-37b4d5c520b1\",\r\n        \"nombre\": \"VivaAir\",\r\n        \"descripcion\": \"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\r\n        \"fechafundacion\": \"2020-09-14T05:00:00.000Z\",\r\n        \"pagina\": \"https://vivaair.com.co\",\r\n        \"aeropuertos\": []\r\n    },\r\n    {\r\n        \"id\": \"57d0bd68-a5f3-4fcd-82cf-e721438314c0\",\r\n        \"nombre\": \"VivaAir\",\r\n        \"descripcion\": \"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\r\n        \"fechafundacion\": \"2020-09-14T05:00:00.000Z\",\r\n        \"pagina\": \"https://vivaair.com.co\",\r\n        \"aeropuertos\": []\r\n    }\r\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener una aerolínea por ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una aerolínea por ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "265"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"109-LVEFKqYEjsdq1N0KNxbkQG7aJC8\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 18:11:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"77bad584-1fe4-423d-8aae-37b4d5c520b1\",\n    \"nombre\": \"VivaAir\",\n    \"descripcion\": \"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\n    \"fechafundacion\": \"2020-09-14T05:00:00.000Z\",\n    \"pagina\": \"https://vivaair.com.co\",\n    \"aeropuertos\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener una aerolínea por un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No se encuentra la aerolinea con este id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/00000000-0000-0000-0000-000000000000",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener una aerolínea por un ID que no existe",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/00000000-0000-0000-0000-000000000000",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47-bic+YxeR5egkUI00NgizxVGfo+U\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 18:14:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encuentra la aerolinea con este id\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una aerolínea.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"VivaAir\",\r\n    \"descripcion\":\"Somos la aerolínea con mas oferta de vuelos a nivel nacional. No tenemos ofertas disponibles\",\r\n    \"fechafundacion\":\"2020-09-14\",\r\n    \"pagina\":\"https://vivaair.com.co\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar una aerolínea.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"VivaAir\",\r\n    \"descripcion\":\"Somos la aerolínea con mas oferta de vuelos a nivel nacional. No tenemos ofertas disponibles\",\r\n    \"fechafundacion\":\"2020-09-14\",\r\n    \"pagina\":\"https://vivaair.com.co\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "238"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"ee-If7NTZV3nI7m5OwV8mM/BgRyUBU\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 18:58:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"77bad584-1fe4-423d-8aae-37b4d5c520b1\",\n    \"nombre\": \"VivaAir\",\n    \"descripcion\": \"Somos la aerolínea con mas oferta de vuelos a nivel nacional. No tenemos ofertas disponibles\",\n    \"fechafundacion\": \"2020-09-14\",\n    \"pagina\": \"https://vivaair.com.co\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar una aerolínea con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No se encuentra la aerolinea con este id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"VivaAir\",\r\n    \"descripcion\":\"Somos la aerolínea con mas oferta de vuelos a nivel nacional. No tenemos ofertas disponibles\",\r\n    \"fechafundacion\":\"2020-09-14\",\r\n    \"pagina\":\"https://vivaair.com.co\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/00000000-0000-0000-0000-000000000000",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar una aerolínea con un ID que no existe",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"VivaAir\",\r\n    \"descripcion\":\"Somos la aerolínea con mas oferta de vuelos a nivel nacional. No tenemos ofertas disponibles\",\r\n    \"fechafundacion\":\"2020-09-14\",\r\n    \"pagina\":\"https://vivaair.com.co\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/00000000-0000-0000-0000-000000000000",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47-bic+YxeR5egkUI00NgizxVGfo+U\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:00:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encuentra la aerolinea con este id\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar una aerolínea por su ID.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar una aerolínea por su ID.",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:02:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar una aerolínea con un ID que no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No se encuentra la aerolinea con este id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/00000000-0000-0000-0000-000000000000",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar una aerolínea con un ID que no existe",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/00000000-0000-0000-0000-000000000000",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "71"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"47-bic+YxeR5egkUI00NgizxVGfo+U\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:03:33 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encuentra la aerolinea con este id\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "scheme",
+			"value": "http"
+		},
+		{
+			"key": "authority",
+			"value": "localhost:3000"
+		},
+		{
+			"key": "prefix_v1",
+			"value": "api/v1"
+		}
+	]
+}

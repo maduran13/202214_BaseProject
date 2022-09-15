@@ -1,0 +1,929 @@
+{
+	"info": {
+		"_postman_id": "cc650ea7-7d56-4de2-bfee-13e2dff066bf",
+		"name": "Aerolíneas-Aeropuertos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Asociar un aeropuerto a una aerolínea.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"   pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_1}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}",
+						"airports",
+						"{{airport_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Asociar un aeropuerto a una aerolínea.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_1}}",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}",
+								"airports",
+								"{{airport_id_1}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "385"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"181-ZHaTRA+LtcSkiq0j34e0Bl1oeYU\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:31:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"a39cf5b9-985f-4ae5-b9b9-9b17d84b0f8a\",\n    \"nombre\": \"VivaAir\",\n    \"descripcion\": \"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\n    \"fechafundacion\": \"2020-09-14T05:00:00.000Z\",\n    \"pagina\": \"https://vivaair.com.co\",\n    \"aeropuertos\": [\n        {\n            \"id\": \"3ba50bed-62d8-427d-884a-84cd63a058fe\",\n            \"nombre\": \"El Dorado\",\n            \"codigo\": \"BOG\",\n            \"pais\": \"Colombia\",\n            \"ciudad\": \"Bogota DC\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Asociar un aeropuerto que no existe a una aerolínea.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No se encuentra el aeropuerto con este id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/00000000-0000-0000-0000-000000000000",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}",
+						"airports",
+						"00000000-0000-0000-0000-000000000000"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Asociar un aeropuerto que no existe a una aerolínea.",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/00000000-0000-0000-0000-000000000000",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}",
+								"airports",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "72"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"48-uQztwiNgn2GQ424WiHCS8J2d/ss\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:33:22 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encuentra el aeropuerto con este id\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener todos los aeropuertos que cubre una aerolínea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}",
+						"airports"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener todos los aeropuertos que cubre una aerolínea",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}",
+								"airports"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "122"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"7a-x47QEPo/Yz+SP+yfjMO90W4qqKA\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:34:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"3ba50bed-62d8-427d-884a-84cd63a058fe\",\n        \"nombre\": \"El Dorado\",\n        \"codigo\": \"BOG\",\n        \"pais\": \"Colombia\",\n        \"ciudad\": \"Bogota DC\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Obtener un aeropuerto asociado a una aerolínea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_1}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}",
+						"airports",
+						"{{airport_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un aeropuerto asociado a una aerolínea",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_1}}",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}",
+								"airports",
+								"{{airport_id_1}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "120"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"78-cXqYDA5+0HL9sW7Hre9BjdhfKYY\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:35:57 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"3ba50bed-62d8-427d-884a-84cd63a058fe\",\n    \"nombre\": \"El Dorado\",\n    \"codigo\": \"BOG\",\n    \"pais\": \"Colombia\",\n    \"ciudad\": \"Bogota DC\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Obtener un aeropuerto que no esté asociado a una aerolínea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El aeropuerto con este id no esta asociada a la aerolinea\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_2}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}",
+						"airports",
+						"{{airport_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Obtener un aeropuerto que no esté asociado a una aerolínea",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_2}}",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}",
+								"airports",
+								"{{airport_id_2}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "88"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"58-vt1I77pYhqzXkht83L2L1RSH5ZM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:38:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El aeropuerto con este id no esta asociada a la aerolinea\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar los aeropuertos que están asociados a una aerolínea.",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"   pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\":\"{{airport_id_1}}\",\r\n        \"nombre\": \"El Dorado Renovado\",\r\n        \"codigo\": \"BOG\",\r\n        \"ciudad\": \"Bogota DC\",\r\n        \"pais\": \"Colombia\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}",
+						"airports"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar los aeropuertos que están asociados a una aerolínea.",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"nombre\": \"El Dorado Renovado\",\r\n        \"codigo\": \"BOG\",\r\n        \"ciudad\": \"Bogota DC\",\r\n        \"pais\": \"Colombia\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}",
+								"airports"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "350"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15e-LLfpEB4ufKH9ySSC700YhgooMgg\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:44:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"a39cf5b9-985f-4ae5-b9b9-9b17d84b0f8a\",\n    \"nombre\": \"VivaAir\",\n    \"descripcion\": \"Somos la aerolínea con mas oferta de vuelos a nivel nacional. Aprovecha nuestras ofertas\",\n    \"fechafundacion\": \"2020-09-14T05:00:00.000Z\",\n    \"pagina\": \"https://vivaair.com.co\",\n    \"aeropuertos\": [\n        {\n            \"nombre\": \"El Dorado Renovado\",\n            \"codigo\": \"BOG\",\n            \"ciudad\": \"Bogota DC\",\n            \"pais\": \"Colombia\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Actualizar los aeropuertos asociados a una aerolínea, con un aeropuerto inexistente",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"   pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"No se encuentra el aeropuerto con este id\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\":\"00000000-0000-0000-0000-000000000000\",\r\n        \"nombre\": \"Charles De Gaulle\",\r\n        \"codigo\": \"CDG\",\r\n        \"ciudad\": \"Paris\",\r\n        \"pais\": \"Francia\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}",
+						"airports"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Actualizar los aeropuertos asociados a una aerolínea, con un aeropuerto inexistente",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\":\"00000000-0000-0000-0000-000000000000\",\r\n        \"nombre\": \"Charles De Gaulle\",\r\n        \"codigo\": \"CDG\",\r\n        \"ciudad\": \"Paris\",\r\n        \"pais\": \"Francia\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}",
+								"airports"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "72"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"48-uQztwiNgn2GQ424WiHCS8J2d/ss\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:54:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 404,\n    \"message\": \"No se encuentra el aeropuerto con este id\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Eliminar un aeropuerto previamente asociado a una aerolínea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"   pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_1}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}",
+						"airports",
+						"{{airport_id_1}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un aeropuerto previamente asociado a una aerolínea",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_1}}",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}",
+								"airports",
+								"{{airport_id_1}}"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:56:25 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "Eliminar un aeropuerto que no estaba previamente asociado a una aerolínea",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 412\", function () {\r",
+							"   pm.response.to.have.status(412);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Get expected error message\", function () {\r",
+							"   var data = pm.response.json();\r",
+							"   pm.expect(data.message).to.eql(\"El aeropuerto con este id no esta asociada a la aerolinea\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_2}}",
+					"protocol": "{{scheme}}",
+					"host": [
+						"{{authority}}"
+					],
+					"path": [
+						"{{prefix_v1}}",
+						"airlines",
+						"{{airline_id}}",
+						"airports",
+						"{{airport_id_2}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Eliminar un aeropuerto que no estaba previamente asociado a una aerolínea",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{scheme}}://{{authority}}/{{prefix_v1}}/airlines/{{airline_id}}/airports/{{airport_id_2}}",
+							"protocol": "{{scheme}}",
+							"host": [
+								"{{authority}}"
+							],
+							"path": [
+								"{{prefix_v1}}",
+								"airlines",
+								"{{airline_id}}",
+								"airports",
+								"{{airport_id_2}}"
+							]
+						}
+					},
+					"status": "Precondition Failed",
+					"code": 412,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "88"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"58-vt1I77pYhqzXkht83L2L1RSH5ZM\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 15 Sep 2022 19:58:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El aeropuerto con este id no esta asociada a la aerolinea\"\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "scheme",
+			"value": "http"
+		},
+		{
+			"key": "authority",
+			"value": "localhost:3000"
+		},
+		{
+			"key": "prefix_v1",
+			"value": "api/v1"
+		}
+	]
+}
